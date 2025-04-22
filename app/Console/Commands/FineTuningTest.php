@@ -8,6 +8,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 class FineTuningTest extends Command
 {
     protected $signature = 'app:fine-tuning-test';
+
     protected $description = 'Command description';
 
     public function handle()

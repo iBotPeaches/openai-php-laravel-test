@@ -8,6 +8,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 class ResponsesTest extends Command
 {
     protected $signature = 'app:responses-test';
+
     protected $description = 'Command description';
 
     public function handle()
@@ -16,12 +17,12 @@ class ResponsesTest extends Command
             'model' => 'gpt-4o-mini',
             'tools' => [
                 [
-                    'type' => 'web_search_preview'
-                ]
+                    'type' => 'web_search_preview',
+                ],
             ],
             'metadata' => [
                 'foo' => 'bar',
-                'openai' => 'php'
+                'openai' => 'php',
             ],
             'text' => [
                 'format' => [
@@ -32,19 +33,19 @@ class ResponsesTest extends Command
                         'properties' => [
                             'title' => [
                                 'type' => 'string',
-                                'description' => 'The title of the blog post'
+                                'description' => 'The title of the blog post',
                             ],
                             'url' => [
                                 'type' => 'string',
-                                'description' => 'The URL of the blog post'
-                            ]
+                                'description' => 'The URL of the blog post',
+                            ],
                         ],
                         'required' => ['title', 'url'],
                         'additionalProperties' => false,
                     ],
-                ]
+                ],
             ],
-            'input' => 'What is last blog from Connor Tumbleson?'
+            'input' => 'What is last blog from Connor Tumbleson?',
         ]);
 
         dd($response);
