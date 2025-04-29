@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class ChatTest extends Command
+class CompletionTest extends Command
 {
-    protected $signature = 'app:chat-test';
+    protected $signature = 'app:completion-test';
 
     protected $description = 'Command description';
 

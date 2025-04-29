@@ -48,6 +48,5 @@ class ResponsesTest extends Command
             'input' => 'What is last blog from Connor Tumbleson?',
         ]);
 
-        dd($response);
     }
 }
