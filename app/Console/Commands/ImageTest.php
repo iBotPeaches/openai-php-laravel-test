@@ -8,6 +8,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 class ImageTest extends Command
 {
     protected $signature = 'app:image-test';
+
     protected $description = 'Command description';
 
     public function handle()

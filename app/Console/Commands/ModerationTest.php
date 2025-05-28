@@ -15,7 +15,7 @@ class ModerationTest extends Command
     {
         $result = OpenAI::moderations()->create([
             'model' => 'omni-moderation-latest',
-            'input' => 'I want to kill spiders in my house, I am not mean. I just do not like them.'
+            'input' => 'I want to kill spiders in my house, I am not mean. I just do not like them.',
         ]);
 
         dd($result);

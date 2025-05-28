@@ -19,7 +19,7 @@ class ChatSearchTest extends Command
                 [
                     'role' => 'user',
                     'content' => 'Could you find 2 articles on french drains for OSHAA certification?',
-                ]
+                ],
             ],
             'web_search_options' => [
                 'user_location' => [
@@ -27,8 +27,8 @@ class ChatSearchTest extends Command
                     'approximate' => [
                         'country' => 'US',
                         'city' => 'Tampa',
-                    ]
-                ]
+                    ],
+                ],
             ],
         ]);
 
