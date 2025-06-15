@@ -8,6 +8,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 class ResponsesImageGenerationTest extends Command
 {
     protected $signature = 'app:responses-image-generation-test';
+
     protected $description = 'Command description';
 
     public function handle(): int
