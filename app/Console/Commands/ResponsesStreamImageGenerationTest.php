@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class ResponsesImageGenerationTest extends Command
+class ResponsesStreamImageGenerationTest extends Command
 {
     protected $signature = 'app:responses-image-generation-test';
 
