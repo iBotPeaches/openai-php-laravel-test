@@ -14,10 +14,12 @@ class ResponsesImageGenerationTest extends Command
     {
         $stream = OpenAI::responses()->createStreamed([
             'model' => 'gpt-4.1-mini',
-            'input' => 'Generate an image of a futuristic cityscape at sunset.',
+            'input' => 'Generate a single black line in a perfect circle.',
             'tools' => [
                 [
                     'type' => 'image_generation',
+                    'size' => '1024x1024',
+                    'quality' => 'low',
                     'partial_images' => 1,
                 ],
             ],
