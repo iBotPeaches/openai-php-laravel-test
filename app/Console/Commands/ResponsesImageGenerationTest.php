@@ -14,7 +14,7 @@ class ResponsesImageGenerationTest extends Command
     {
         $stream = OpenAI::responses()->createStreamed([
             'model' => 'gpt-4.1-mini',
-            'input' => 'Generate a single black line in a perfect circle.',
+            'input' => 'Just a black dot.',
             'tools' => [
                 [
                     'type' => 'image_generation',
