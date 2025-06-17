@@ -8,6 +8,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 class AudioStreamTranscriptionTest extends Command
 {
     protected $signature = 'app:audio-stream-transcription-test';
+
     protected $description = 'Command description';
 
     public function handle(): int
