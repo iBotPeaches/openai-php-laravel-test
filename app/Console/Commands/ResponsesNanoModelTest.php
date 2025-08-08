@@ -15,7 +15,9 @@ class ResponsesNanoModelTest extends Command
     {
         $response = OpenAI::responses()->create([
             'model' => 'gpt-5-nano',
+            'instructions' => 'Extremely precise brief answers intended for someone with OSHA training.',
             'input' => 'What is the purpose of a culvert?',
+            'previous_response_id' => null,
         ]);
 
         dd($response->toArray());
