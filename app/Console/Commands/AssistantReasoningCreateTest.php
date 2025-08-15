@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class AssistantReasoningCreate extends Command
+class AssistantReasoningCreateTest extends Command
 {
     protected $signature = 'app:assistant-reasoning-create';
 
