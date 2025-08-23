@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'dropbox' => [
+        'api_key' => env('DROPBOX_API_KEY'),
+    ],
+
 ];
