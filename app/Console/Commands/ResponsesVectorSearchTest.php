@@ -35,13 +35,25 @@ class ResponsesVectorSearchTest extends Command
                         ],
                         'filters' => [
                             'type' => 'or',
-                            'filters' => [[
-                                'type' => 'or',
-                                'filters' => [
-                                    ['type' => 'eq', 'key' => 'state', 'value' => 'ks'],
-                                    ['type' => 'ne', 'key' => 'state', 'value' => 'mo'],
+                            'filters' => [
+                                [
+                                    'type' => 'or',
+                                    'filters' => [
+                                        ['type' => 'eq', 'key' => 'state', 'value' => 'ks'],
+                                        ['type' => 'ne', 'key' => 'state', 'value' => 'mo'],
+                                    ],
                                 ],
-                            ]],
+                                [
+                                    'type' => 'and',
+                                    'filters' => [
+                                        ['type' => 'gt', 'key' => 'population', 'value' => 1000],
+                                        ['type' => 'lt', 'key' => 'population', 'value' => 100000],
+                                    ],
+                                ],
+                                [
+                                    'type' => 'eq', 'key' => 'project', 'value' => 'test_project',
+                                ],
+                            ],
                         ],
                     ],
                 ],
