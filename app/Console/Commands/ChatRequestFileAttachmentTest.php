@@ -9,7 +9,7 @@ class ChatRequestFileAttachmentTest extends Command
 {
     protected $signature = 'app:chat-request-file-attachment-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Test chat with file attachment.';
 
     public function handle(): int
     {

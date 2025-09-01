@@ -9,7 +9,7 @@ class ChatImageTest extends Command
 {
     protected $signature = 'app:chat-image-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Test chat with image input.';
 
     public function handle(): int
     {

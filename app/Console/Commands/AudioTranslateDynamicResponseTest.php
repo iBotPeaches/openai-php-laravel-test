@@ -9,7 +9,7 @@ class AudioTranslateDynamicResponseTest extends Command
 {
     protected $signature = 'app:audio-translate-dynamic-response-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Audio translation with different response formats.';
 
     public function handle(): void
     {

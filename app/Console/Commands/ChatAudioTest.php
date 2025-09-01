@@ -9,7 +9,7 @@ class ChatAudioTest extends Command
 {
     protected $signature = 'app:chat-audio-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Test chat with audio response.';
 
     public function handle(): int
     {

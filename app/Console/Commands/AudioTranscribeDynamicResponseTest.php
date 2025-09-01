@@ -9,7 +9,7 @@ class AudioTranscribeDynamicResponseTest extends Command
 {
     protected $signature = 'app:audio-transcribe-dynamic-response-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Audio transcription with different response formats.';
 
     public function handle(): void
     {

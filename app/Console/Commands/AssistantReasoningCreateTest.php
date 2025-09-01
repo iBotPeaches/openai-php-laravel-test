@@ -9,7 +9,7 @@ class AssistantReasoningCreateTest extends Command
 {
     protected $signature = 'app:assistant-reasoning-create';
 
-    protected $description = 'Command description';
+    protected $description = 'Create and delete a reasoning assistant.';
 
     /**
      * Execute the console command.

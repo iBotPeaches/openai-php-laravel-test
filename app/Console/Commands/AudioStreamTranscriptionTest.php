@@ -9,7 +9,7 @@ class AudioStreamTranscriptionTest extends Command
 {
     protected $signature = 'app:audio-stream-transcription-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Test audio transcription using streamed responses.';
 
     public function handle(): int
     {

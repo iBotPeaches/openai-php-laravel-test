@@ -9,7 +9,7 @@ class ChatSearchTest extends Command
 {
     protected $signature = 'app:chatsearch-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Test chat with web search capabilities.';
 
     public function handle()
     {
