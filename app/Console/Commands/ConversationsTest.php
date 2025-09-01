@@ -5,11 +5,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class ResponseConversationTest extends Command
+class ConversationsTest extends Command
 {
-    protected $signature = 'app:response-conversation-test';
+    protected $signature = 'app:conversation-test';
 
-    protected $description = 'Command description';
+    protected $description = 'Comprehensive test of conversations.';
 
     public function handle()
     {

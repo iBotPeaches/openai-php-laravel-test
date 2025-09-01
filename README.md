@@ -22,12 +22,12 @@
 | `app:completion-test` | Command description |
 | `app:container-file-object-test` | Command description |
 | `app:container-test` | Command description |
+| `app:conversation-test` | Comprehensive test of conversations. |
 | `app:fine-tuning-test` | Command description |
 | `app:image-edit-test` | Command description |
 | `app:image-test` | Command description |
 | `app:moderation-test` | Command description |
 | `app:realtime-token-test` | Command description |
-| `app:response-conversation-test` | Command description |
 | `app:responses-basic-test` | Command description |
 | `app:responses-cancel-test` | Command description |
 | `app:responses-code-interpreter-background-test` | Command description |
