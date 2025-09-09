@@ -49,13 +49,13 @@ class ConversationsTest extends Command
         $listItems = OpenAI::conversations()->items()->list($firstConversation->id);
 
         $itemId = null;
-        foreach ($listItems->data as $item) {
-            $this->info("Item ID: {$item->id}, Role: {$item->role}");
-            $itemId = $item->id;
+        foreach ($listItems->data as $listItem) {
+            $this->info("Item ID: {$listItem->item->id}, Role: {$listItem->item->role}");
+            $itemId = $listItem->item->id;
         }
 
         $retrievedItem = OpenAI::conversations()->items()->retrieve($firstConversation->id, $itemId);
-        $this->info('Retrieved item ID: '.$retrievedItem->id);
+        $this->info('Retrieved item ID: '.$retrievedItem->item->id);
 
         $deleteItem = OpenAI::conversations()->items()->delete($firstConversation->id, $itemId);
         $this->info('Deleted item ID: '.$deleteItem->id);
