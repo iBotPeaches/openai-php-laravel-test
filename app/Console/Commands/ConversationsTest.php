@@ -14,6 +14,7 @@ class ConversationsTest extends Command
     public function handle()
     {
         $firstConversation = OpenAI::conversations()->create([
+            'metadata' => ['topic' => 'demo'],
             'items' => [
                 [
                     'role' => 'developer',
@@ -46,7 +47,9 @@ class ConversationsTest extends Command
         ]);
 
         $this->info('Added new item to conversation.');
-        $listItems = OpenAI::conversations()->items()->list($firstConversation->id);
+        $listItems = OpenAI::conversations()->items()->list($firstConversation->id, [
+            'limit' => 10,
+        ]);
 
         $itemId = null;
         foreach ($listItems->data as $listItem) {
@@ -54,7 +57,11 @@ class ConversationsTest extends Command
             $itemId = $listItem->item->id;
         }
 
-        $retrievedItem = OpenAI::conversations()->items()->retrieve($firstConversation->id, $itemId);
+        $retrievedItem = OpenAI::conversations()->items()->retrieve($firstConversation->id, $itemId, [
+            'include' => [
+                'message.output_text.logprobs',
+            ]
+        ]);
         $this->info('Retrieved item ID: '.$retrievedItem->item->id);
 
         $deleteItem = OpenAI::conversations()->items()->delete($firstConversation->id, $itemId);
