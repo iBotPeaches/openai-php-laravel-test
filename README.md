@@ -26,6 +26,7 @@
 | `app:fine-tuning-test` | Command description |
 | `app:image-edit-test` | Command description |
 | `app:image-test` | Command description |
+| `app:model-test` | List available models from OpenAI |
 | `app:moderation-test` | Command description |
 | `app:realtime-token-test` | Command description |
 | `app:responses-basic-test` | Command description |
