@@ -22,8 +22,14 @@ class ResponsesMcpTest extends Command
                     'server_url' => 'https://mcp.deepwiki.com/mcp',
                     'require_approval' => 'never',
                 ],
+                [
+                    'type' => 'mcp',
+                    'server_label' => 'deploy-html',
+                    'server_url' => 'https://remote.mcpservers.org/edgeone-pages/mcp',
+                    'require_approval' => 'never',
+                ]
             ],
-            'input' => 'What transport protocols are supported in the 2025-03-26 version of the MCP spec?',
+            'input' => 'Use your method deploy-html to deploy this text "test""',
         ]);
 
         dd($response);
