@@ -60,7 +60,7 @@ class ConversationsTest extends Command
         $retrievedItem = OpenAI::conversations()->items()->retrieve($firstConversation->id, $itemId, [
             'include' => [
                 'message.output_text.logprobs',
-            ]
+            ],
         ]);
         $this->info('Retrieved item ID: '.$retrievedItem->item->id);
 

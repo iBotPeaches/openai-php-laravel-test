@@ -27,7 +27,7 @@ class ResponsesMcpTest extends Command
                     'server_label' => 'deploy-html',
                     'server_url' => 'https://remote.mcpservers.org/edgeone-pages/mcp',
                     'require_approval' => 'never',
-                ]
+                ],
             ],
             'input' => 'Use your method deploy-html to deploy this text "test""',
         ]);
