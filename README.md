@@ -23,6 +23,7 @@
 | `app:container-file-object-test` | Command description |
 | `app:container-test` | Command description |
 | `app:conversation-test` | Comprehensive test of conversations. |
+| `app:file-list-test` | Test listing files to confirm pagination fields are present. |
 | `app:fine-tuning-test` | Command description |
 | `app:image-edit-test` | Command description |
 | `app:image-test` | Command description |
