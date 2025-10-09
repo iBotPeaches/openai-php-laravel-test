@@ -39,4 +39,8 @@ return [
         'api_key' => env('DROPBOX_API_KEY'),
     ],
 
+    'lite-llm' => [
+        'api_key' => env('LITELLM_LICENSE'),
+    ],
+
 ];

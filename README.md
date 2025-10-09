@@ -15,6 +15,7 @@
 | `app:audio-transcribe-dynamic-response-test` | Audio transcription with different response formats. |
 | `app:audio-translate-dynamic-response-test` | Audio translation with different response formats. |
 | `app:chat-audio-test` | Test chat with audio response. |
+| `app:chat-image-nano-banana-test` | Chat image using LiteLLM Nano model. |
 | `app:chat-image-test` | Test chat with image input. |
 | `app:chat-request-file-attachment-test` | Test chat with file attachment. |
 | `app:chat-stream-include-usage-test` | Command description |
