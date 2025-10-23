@@ -12,6 +12,7 @@
 |---|---|
 | `app:assistant-reasoning-create` | Create and delete a reasoning assistant. |
 | `app:audio-stream-transcription-test` | Test audio transcription using streamed responses. |
+| `app:audio-transcribe-diarize-test` | Transcribe audio with speaker diarization. |
 | `app:audio-transcribe-dynamic-response-test` | Audio transcription with different response formats. |
 | `app:audio-translate-dynamic-response-test` | Audio translation with different response formats. |
 | `app:chat-audio-test` | Test chat with audio response. |
