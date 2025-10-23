@@ -48,5 +48,6 @@
 | `app:responses-stream-mcp-test` | Test for Model Context Protocol (MCP) |
 | `app:responses-test` | Command description |
 | `app:responses-vector-search-test` | Command description |
+| `app:responses-web-search-test` | Testing include of web search result sources |
 
 <!-- COMMANDS:END -->
