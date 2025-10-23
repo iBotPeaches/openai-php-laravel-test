@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class ResponseMcpConnectorTest extends Command
+class ResponsesMcpConnectorTest extends Command
 {
     protected $signature = 'app:responses-mcp-connector-test';
 
