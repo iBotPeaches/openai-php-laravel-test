@@ -21,6 +21,7 @@
 | `app:chat-request-file-attachment-test` | Test chat with file attachment. |
 | `app:chat-stream-include-usage-test` | Command description |
 | `app:chatsearch-test` | Test chat with web search capabilities. |
+| `app:completion-streamed-test` | Stream test with usage inclusion. |
 | `app:completion-test` | Command description |
 | `app:container-file-object-test` | Command description |
 | `app:container-test` | Command description |
