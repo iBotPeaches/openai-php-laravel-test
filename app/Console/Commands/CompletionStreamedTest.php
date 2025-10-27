@@ -16,6 +16,9 @@ class CompletionStreamedTest extends Command
         $stream = OpenAI::completions()->createStreamed([
             'model' => 'gpt-3.5-turbo-instruct',
             'prompt' => 'This is a test',
+            'stream_options' => [
+                'include_usage' => true,
+            ],
         ]);
 
         foreach ($stream as $response) {
