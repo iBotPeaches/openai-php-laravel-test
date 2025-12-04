@@ -28,6 +28,7 @@
 | `app:conversation-test` | Comprehensive test of conversations. |
 | `app:file-list-test` | Test listing files to confirm pagination fields are present. |
 | `app:fine-tuning-test` | Command description |
+| `app:image-edit-stream-test` | Stream events for an image edit. |
 | `app:image-edit-test` | Command description |
 | `app:image-test` | Command description |
 | `app:model-test` | List available models from OpenAI |
