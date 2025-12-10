@@ -19,8 +19,10 @@
         "laravel/framework": "^12.0",
         "laravel/telescope": "^5.11",
         "laravel/tinker": "^2.10.1",
+        "nyholm/psr7": "^1.8",
         "openai-php/laravel": "*",
-        "swisnl/laravel-psr-http-client-bridge": "^0.2.1"
+        "swisnl/laravel-psr-http-client-bridge": "^0.2.1",
+        "symfony/psr-http-message-bridge": "^8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
