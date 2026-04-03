@@ -1,17 +1,21 @@
 <?php
 
+use Illuminate\Contracts\Console\Kernel;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+
 chdir(__DIR__.'/..');
 
 require __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../bootstrap/app.php';
-$app->make(Illuminate\Contracts\Console\Kernel::class);
+$app->make(Kernel::class);
 
 // Try to get list via Symfony console JSON if available
 $commands = [];
 
-$artisan = $app->make(Illuminate\Contracts\Console\Kernel::class);
-$output = new Symfony\Component\Console\Output\BufferedOutput;
-$input = new Symfony\Component\Console\Input\ArrayInput(['command' => 'list', '--format' => 'json']);
+$artisan = $app->make(Kernel::class);
+$output = new BufferedOutput;
+$input = new ArrayInput(['command' => 'list', '--format' => 'json']);
 $artisan->handle($input, $output);
 $data = json_decode($output->fetch(), true);
 if (is_array($data) && isset($data['commands'])) {

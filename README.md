@@ -51,5 +51,6 @@
 | `app:responses-test` | Command description |
 | `app:responses-vector-search-test` | Command description |
 | `app:responses-web-search-test` | Testing include of web search result sources |
+| `app:vector-store-create-delete-test` | Creates a vector store with no description and then deletes it |
 
 <!-- COMMANDS:END -->
