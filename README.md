@@ -38,11 +38,13 @@
 | `app:responses-cancel-test` | Command description |
 | `app:responses-code-interpreter-background-test` | Command description |
 | `app:responses-code-interpreter-test` | Command description |
+| `app:responses-compaction-test` | Test compaction. |
 | `app:responses-function-test` | Test function calling with the responses endpoint. |
 | `app:responses-image-generation-test` | Command description |
 | `app:responses-mcp-connector-test` | Test for Model Context Protocol (MCP) via Connectors |
 | `app:responses-mcp-require-approval-test` | Test for Model Context Protocol (MCP) |
 | `app:responses-mcp-test` | Test for Model Context Protocol (MCP) |
+| `app:responses-mcp-tool-search-test` | Test for Model Context Protocol (MCP) Tool Search |
 | `app:responses-nano-model-test` | Command description |
 | `app:responses-service-tier-test` | Command description |
 | `app:responses-stored-prompt-test` | Command description |
