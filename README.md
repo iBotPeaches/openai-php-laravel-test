@@ -47,6 +47,7 @@
 | `app:responses-mcp-tool-search-test` | Test for Model Context Protocol (MCP) Tool Search |
 | `app:responses-nano-model-test` | Command description |
 | `app:responses-service-tier-test` | Command description |
+| `app:responses-shell-test` | Test the Responses API shell tool: hosted containers, local execution, attached skills and streaming. |
 | `app:responses-stored-prompt-test` | Command description |
 | `app:responses-stream-code-interpreter-test` | Command description |
 | `app:responses-stream-mcp-test` | Test for Model Context Protocol (MCP) |
