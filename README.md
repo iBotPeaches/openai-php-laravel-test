@@ -26,7 +26,7 @@
 | `app:container-file-object-test` | Command description |
 | `app:container-test` | Command description |
 | `app:conversation-test` | Comprehensive test of conversations. |
-| `app:decisions-test` | Test the Decisions API with predicate, choice and score questions. |
+| `app:decisions-test` | Test the Decisions API with predicate, choice and score questions over text and image input. |
 | `app:file-list-test` | Test listing files to confirm pagination fields are present. |
 | `app:fine-tuning-test` | Command description |
 | `app:image-edit-stream-test` | Stream events for an image edit. |
