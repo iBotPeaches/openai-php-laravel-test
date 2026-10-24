@@ -10,6 +10,8 @@
 
 | Command | Description |
 |---|---|
+| `app:agent-env-session-test` | Test Agent Environments and Sessions (beta) together: template, prewarmed environment, session, files and events. |
+| `app:agent-environments-test` | Test the Agent Environments API (beta): templates, environments and files. |
 | `app:agents-test` | Test the Agents API (beta): create, list, retrieve, update and delete. |
 | `app:assistant-reasoning-create` | Create and delete a reasoning assistant. |
 | `app:audio-stream-transcription-test` | Test audio transcription using streamed responses. |
