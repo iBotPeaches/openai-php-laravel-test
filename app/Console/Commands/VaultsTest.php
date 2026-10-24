@@ -2,15 +2,16 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Concerns\RetriesUntilReady;
 use Illuminate\Console\Command;
 use OpenAI\Contracts\ClientContract;
-use OpenAI\Exceptions\ErrorException;
 use OpenAI\Responses\Vaults\Credentials\VaultCredentialResponse;
 use OpenAI\Responses\Vaults\VaultResponse;
-use RuntimeException;
 
 class VaultsTest extends Command
 {
+    use RetriesUntilReady;
+
     protected $signature = 'app:vaults-test';
 
     protected $description = 'Test the Vaults API (beta): vaults and credentials of every auth type.';
@@ -169,40 +170,6 @@ class VaultsTest extends Command
                 ],
             ],
         ];
-    }
-
-    /**
-     * Retry a read until it succeeds, because reads that follow a write are eventually consistent.
-     *
-     * @template TResult
-     *
-     * @param  callable(): TResult  $read
-     * @param  (callable(TResult): bool)|null  $ready
-     * @return TResult
-     */
-    private function eventually(callable $read, ?callable $ready = null): mixed
-    {
-        $attempts = 10;
-        $ready ??= static fn (): bool => true;
-
-        for ($attempt = 1; $attempt <= $attempts; $attempt++) {
-            try {
-                $result = $read();
-
-                if ($ready($result)) {
-                    return $result;
-                }
-            } catch (ErrorException $e) {
-                if ($attempt === $attempts) {
-                    throw $e;
-                }
-            }
-
-            $this->comment("Waiting for the vault to become readable (attempt {$attempt} of {$attempts})...");
-            sleep(2);
-        }
-
-        throw new RuntimeException('The vault never became readable.');
     }
 
     private function printVault(VaultResponse $vault): void

@@ -2,14 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Concerns\RetriesUntilReady;
 use Illuminate\Console\Command;
 use OpenAI\Contracts\ClientContract;
-use OpenAI\Exceptions\ErrorException;
-use RuntimeException;
 use ZipArchive;
 
 class SkillsTest extends Command
 {
+    use RetriesUntilReady;
+
     protected $signature = 'app:skills-test';
 
     protected $description = 'Comprehensive test of skills and skill versions.';
@@ -96,40 +97,6 @@ class SkillsTest extends Command
         }
 
         return self::SUCCESS;
-    }
-
-    /**
-     * Retry a read until it succeeds, because reads that follow a write are eventually consistent.
-     *
-     * @template TResult
-     *
-     * @param  callable(): TResult  $read
-     * @param  (callable(TResult): bool)|null  $ready
-     * @return TResult
-     */
-    private function eventually(callable $read, ?callable $ready = null): mixed
-    {
-        $attempts = 5;
-        $ready ??= static fn (): bool => true;
-
-        for ($attempt = 1; $attempt <= $attempts; $attempt++) {
-            try {
-                $result = $read();
-
-                if ($ready($result)) {
-                    return $result;
-                }
-            } catch (ErrorException $e) {
-                if ($attempt === $attempts) {
-                    throw $e;
-                }
-            }
-
-            $this->comment("Waiting for the skill to become readable (attempt {$attempt} of {$attempts})...");
-            sleep(1);
-        }
-
-        throw new RuntimeException('The skill never became readable.');
     }
 
     /**

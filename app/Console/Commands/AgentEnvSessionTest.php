@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Concerns\RetriesUntilReady;
 use Illuminate\Console\Command;
 use OpenAI\Contracts\ClientContract;
-use OpenAI\Exceptions\ErrorException;
 use OpenAI\Responses\Agents\Environments\AgentEnvironmentResponse;
 use OpenAI\Responses\Agents\Environments\Files\AgentEnvironmentFileResponse;
 use OpenAI\Responses\Agents\Environments\Templates\AgentEnvironmentTemplateResponse;
@@ -13,6 +13,8 @@ use RuntimeException;
 
 class AgentEnvSessionTest extends Command
 {
+    use RetriesUntilReady;
+
     protected $signature = 'app:agent-env-session-test {--model=gpt-5.4}';
 
     protected $description = 'Test Agent Environments and Sessions (beta) together: template, prewarmed environment, session, files and events.';
@@ -212,43 +214,6 @@ class AgentEnvSessionTest extends Command
         }
 
         return self::SUCCESS;
-    }
-
-    /**
-     * Retry a read until it is ready, because reads that follow a write are eventually consistent.
-     *
-     * @template TResult
-     *
-     * @param  callable(): TResult  $read
-     * @param  (callable(TResult): bool)|null  $ready
-     * @return TResult
-     */
-    private function eventually(callable $read, ?callable $ready = null, int $attempts = 10, int $seconds = 2): mixed
-    {
-        $ready ??= static fn (): bool => true;
-
-        for ($attempt = 1; $attempt <= $attempts; $attempt++) {
-            try {
-                $result = $read();
-
-                if ($ready($result)) {
-                    return $result;
-                }
-
-                $status = $result->status ?? null;
-            } catch (ErrorException $e) {
-                if ($attempt === $attempts) {
-                    throw $e;
-                }
-
-                $status = $e->getMessage();
-            }
-
-            $this->comment("Waiting (attempt {$attempt} of {$attempts})...".($status !== null ? " [{$status}]" : ''));
-            sleep($seconds);
-        }
-
-        throw new RuntimeException('The resource never became ready.');
     }
 
     private function printTemplate(AgentEnvironmentTemplateResponse $template): void

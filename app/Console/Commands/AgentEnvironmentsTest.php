@@ -2,17 +2,18 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Concerns\RetriesUntilReady;
 use Illuminate\Console\Command;
 use OpenAI\Contracts\ClientContract;
 use OpenAI\Contracts\Resources\AgentEnvironmentsContract;
-use OpenAI\Exceptions\ErrorException;
 use OpenAI\Responses\Agents\Environments\AgentEnvironmentResponse;
 use OpenAI\Responses\Agents\Environments\Files\AgentEnvironmentFileResponse;
 use OpenAI\Responses\Agents\Environments\Templates\AgentEnvironmentTemplateResponse;
-use RuntimeException;
 
 class AgentEnvironmentsTest extends Command
 {
+    use RetriesUntilReady;
+
     protected $signature = 'app:agent-environments-test
         {--create-environment : Also create an environment from the template (needs the prewarming beta)}
         {--environment= : ID of an environment connected to a session, to test the files endpoints}';
@@ -123,7 +124,7 @@ class AgentEnvironmentsTest extends Command
         $this->printEnvironment($this->eventually(fn () => $environments->retrieve($environment->id)));
     }
 
-    private function testFiles(AgentEnvironmentsContract $environments, string $environmentId): void
+    private function test_files(AgentEnvironmentsContract $environments, string $environmentId): void
     {
         $files = $environments->files();
 
@@ -168,40 +169,6 @@ class AgentEnvironmentsTest extends Command
         $found
             ? $this->info("Found the created file at {$path}.")
             : $this->warn("The created file at {$path} was not listed.");
-    }
-
-    /**
-     * Retry a read until it succeeds, because reads that follow a write are eventually consistent.
-     *
-     * @template TResult
-     *
-     * @param  callable(): TResult  $read
-     * @param  (callable(TResult): bool)|null  $ready
-     * @return TResult
-     */
-    private function eventually(callable $read, ?callable $ready = null): mixed
-    {
-        $attempts = 10;
-        $ready ??= static fn (): bool => true;
-
-        for ($attempt = 1; $attempt <= $attempts; $attempt++) {
-            try {
-                $result = $read();
-
-                if ($ready($result)) {
-                    return $result;
-                }
-            } catch (ErrorException $e) {
-                if ($attempt === $attempts) {
-                    throw $e;
-                }
-            }
-
-            $this->comment("Waiting for the resource to become readable (attempt {$attempt} of {$attempts})...");
-            sleep(2);
-        }
-
-        throw new RuntimeException('The resource never became readable.');
     }
 
     private function printTemplate(AgentEnvironmentTemplateResponse $template): void

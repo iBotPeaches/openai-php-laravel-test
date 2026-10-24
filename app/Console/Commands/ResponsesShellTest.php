@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Concerns\RetriesUntilReady;
 use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Console\Command;
 use OpenAI\Contracts\ClientContract;
@@ -27,6 +28,8 @@ use ZipArchive;
 
 class ResponsesShellTest extends Command
 {
+    use RetriesUntilReady;
+
     protected $signature = 'app:responses-shell-test
         {--environment=container_auto : Where the shell runs: container_auto (hosted by OpenAI) or local (this machine)}
         {--skill= : Attach the word count skill as reference or inline (container_auto), or as local (local)}
@@ -175,7 +178,11 @@ class ResponsesShellTest extends Command
 
     private function create(ClientContract $client, array $parameters): CreateResponse
     {
-        $response = $this->eventually(fn (): CreateResponse => $client->responses()->create($parameters));
+        $response = $this->eventually(
+            fn (): CreateResponse => $client->responses()->create($parameters),
+            attempts: 5,
+            retryIf: fn (ErrorException $e): bool => str_contains($e->getMessage(), 'Skill'),
+        );
 
         $this->report($response);
 
@@ -191,7 +198,11 @@ class ResponsesShellTest extends Command
     {
         $completed = null;
 
-        $stream = $this->eventually(fn (): StreamResponse => $this->streamingClient()->responses()->createStreamed($parameters));
+        $stream = $this->eventually(
+            fn (): StreamResponse => $this->streamingClient()->responses()->createStreamed($parameters),
+            attempts: 5,
+            retryIf: fn (ErrorException $e): bool => str_contains($e->getMessage(), 'Skill'),
+        );
 
         foreach ($stream as $event) {
             $payload = $event->response;
@@ -227,32 +238,6 @@ class ResponsesShellTest extends Command
         }
 
         return $completed;
-    }
-
-    /**
-     * A freshly uploaded skill is not readable right away, so retry while the service says it is missing.
-     *
-     * @template TResult
-     *
-     * @param  callable(): TResult  $call
-     * @return TResult
-     */
-    private function eventually(callable $call): mixed
-    {
-        $attempts = 5;
-
-        for ($attempt = 1; ; $attempt++) {
-            try {
-                return $call();
-            } catch (ErrorException $e) {
-                if ($attempt === $attempts || ! str_contains($e->getMessage(), 'Skill')) {
-                    throw $e;
-                }
-
-                $this->comment("The uploaded skill is not readable yet, retrying (attempt {$attempt} of {$attempts})...");
-                sleep(2);
-            }
-        }
     }
 
     /**
