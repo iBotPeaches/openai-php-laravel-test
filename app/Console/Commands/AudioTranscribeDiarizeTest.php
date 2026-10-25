@@ -21,9 +21,7 @@ class AudioTranscribeDiarizeTest extends Command
             'model' => 'gpt-4o-transcribe-diarize',
             'file' => fopen($audioFile, 'r'),
             'known_speaker_names' => ['alice'],
-            'known_speaker_references' => [
-                'alice' => $dataVoiceUrl,
-            ],
+            'known_speaker_references' => [$dataVoiceUrl],
             'response_format' => 'diarized_json',
         ]);
 

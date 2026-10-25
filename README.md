@@ -37,6 +37,7 @@
 | `app:image-test` | Command description |
 | `app:model-test` | List available models from OpenAI |
 | `app:moderation-test` | Command description |
+| `app:multipart-nested-params-test` | Test nested parameters of multipart requests: keyed objects, numeric values and lists. |
 | `app:realtime-token-test` | Command description |
 | `app:responses-basic-test` | Command description |
 | `app:responses-cancel-test` | Command description |
