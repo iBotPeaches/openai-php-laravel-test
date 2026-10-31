@@ -44,6 +44,7 @@
 | `app:responses-code-interpreter-background-test` | Command description |
 | `app:responses-code-interpreter-test` | Command description |
 | `app:responses-compaction-test` | Test compaction. |
+| `app:responses-computer-test` | Test the Responses API computer tool: batched actions, the preview tool, screenshot replies and round trips. |
 | `app:responses-function-test` | Test function calling with the responses endpoint. |
 | `app:responses-image-generation-test` | Command description |
 | `app:responses-mcp-connector-test` | Test for Model Context Protocol (MCP) via Connectors |
