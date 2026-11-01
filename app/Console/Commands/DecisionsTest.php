@@ -73,7 +73,17 @@ class DecisionsTest extends Command
         $this->info('wants_refund via answer(): '.var_export($response->answer('wants_refund')?->probability, true));
         $this->info('missing via answer(): '.var_export($response->answer('missing'), true));
 
-        $this->info('Request ID: '.$response->meta()->requestId);
+        // Array access mirrors the properties.
+        $this->info('model via array access: '.var_export($response['model'], true));
+        $this->info('total_tokens via array access: '.var_export($response['usage']['total_tokens'] ?? null, true));
+
+        // Rebuilding from toArray() should be lossless.
+        $roundTrip = CreateResponse::from($response->toArray(), $response->meta())->toArray();
+        $roundTrip === $response->toArray()
+            ? $this->info('toArray() round trip: OK')
+            : $this->error('toArray() round trip: MISMATCH');
+
+        $this->printMeta($response);
         $this->line(json_encode($response->toArray(), JSON_PRETTY_PRINT));
     }
 
@@ -129,10 +139,14 @@ class DecisionsTest extends Command
         ]);
 
         $this->printAnswers($response);
+        $this->printMeta($response);
     }
 
     private function printAnswers(CreateResponse $response): void
     {
+        $this->info("Model: {$response->model}");
+        $this->printUsage($response);
+
         $this->info('Received '.count($response->answers).' answer(s).');
 
         foreach ($response->answers as $answer) {
@@ -143,6 +157,32 @@ class DecisionsTest extends Command
                 $answer instanceof RefusalAnswer => $this->warn("[refusal] {$answer->name}"),
             };
         }
+    }
+
+    private function printUsage(CreateResponse $response): void
+    {
+        $usage = $response->usage;
+
+        if ($usage === null) {
+            $this->warn('Usage: not returned');
+
+            return;
+        }
+
+        $this->info("Usage: {$usage->inputTokens} input / {$usage->outputTokens} output / {$usage->totalTokens} total");
+        $this->line("    cached: {$usage->inputTokensDetails->cachedTokens}, cache write: {$usage->inputTokensDetails->cacheWriteTokens}");
+        $this->line("    reasoning: {$usage->outputTokensDetails->reasoningTokens}");
+    }
+
+    private function printMeta(CreateResponse $response): void
+    {
+        $meta = $response->meta();
+
+        $this->info('Request ID: '.$meta->requestId);
+        $this->line('    openai-model: '.var_export($meta->openai->model, true));
+        $this->line('    openai-processing-ms: '.var_export($meta->openai->processingMs, true));
+        $this->line('    requests remaining: '.var_export($meta->requestLimit?->remaining, true));
+        $this->line('    tokens remaining: '.var_export($meta->tokenLimit?->remaining, true));
     }
 
     private function printChoice(ChoiceAnswer $answer): void
